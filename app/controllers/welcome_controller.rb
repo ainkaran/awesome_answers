@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-
+  # this is the `index` action in our Welcome controller
   def index
   end
     # render plain: 'Hellow world!'
@@ -20,5 +20,4 @@ class WelcomeController < ApplicationController
     # the layout will contain the HTML `<head>` and usually contains the page's
     # header and footer. The content of you view file will go in the place of
     # `<%= yield %>` inside the layout file.
-
 end
