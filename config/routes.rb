@@ -1,9 +1,37 @@
 Rails.application.routes.draw do
 
-  resources :stuff
-  # resources :questions, except: [:delete]
-  # resources :questions, only: [:index, :show
-  resources :questions
+    resources :stuff
+
+    # Note that we are not using `resources` in this case, because
+    # there should always only be one session. Singular resource will
+    # not create any routes that requires id. Instead, it expects that
+    # it will always be working with the same resource.
+
+    # Even though resource is singular and we gave an argument (i.e. :session)
+    # that is singular, it still expects the controller to be named in plural
+    # (i.e. SessionsController)
+    resource :session, only: [:new, :create, :destroy]
+    resources :users, only: [:new, :create]
+
+    # POST /questions/5/answers
+
+    # resources :questions, except: [:delete]
+    # resources :questions, only: [:index, :show
+    resources :questions do
+      resources :answers, only: [:create, :destroy]
+      # We can nest routes. When doing so, rails will generate the route prefix
+      # with the parent resources in this `/questions/:question_id`
+
+      # Example routes that generate by the above:
+      # /questions/:question_id/answers(.:format)
+      # /questions/:question_id/answers/new(.:format)
+
+      # When using a route helper method of a nested route such
+      # as question_answers_path (or question_answers_url), you
+      # must provide an id or record of the parent resources
+      # (e.g. `question_answers_path(@question)`)
+    end
+
   # resources :questions will generate all CRUD routes just like
   # we wrote below for a given resource name. Make sure that you write
   # plural `resources` and also pluralize the resource name (i.e. :questions)
