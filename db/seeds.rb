@@ -26,10 +26,12 @@ User.create first_name: 'Ainkaran', last_name: 'Pathmanathan', email: 'pat.ainka
   )
 end
 
+users = User.all
+
 100.times do
   Question.create title: Faker::ChuckNorris.fact,
                   body: Faker::Hacker.say_something_smart,
-                  view_count: rand(1000)
+                  view_count: rand(1000),
                   user: users.sample
 
 end

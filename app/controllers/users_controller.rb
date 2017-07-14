@@ -17,7 +17,8 @@ class UsersController < ApplicationController
       # When using `redirect_to`, we can include the flash as an argument
       # instead of writing in a single as above ð
       session[:user_id] = @user.id
-      redirect_to home_path, notice: 'Thank you for signing up!'
+      # redirect_to home_path, notice: 'Thank you for signing up!'
+      redirect_to root_path, notice: 'Thank you for signing up!'
     else
       # render :new, alert: @user.errors.full_messages.join(', ')
       # Sometimes we want the flash message to appear in the current request and

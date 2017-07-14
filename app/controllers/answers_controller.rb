@@ -21,14 +21,15 @@ class AnswersController < ApplicationController
       # We can use render to display any template by providing their
      # beginning from the `views/` folder.
 
-      # @answers = @question.answers.order(created_at: :desc)
-      # render 'questions/show'
+      @answers = @question.answers.order(created_at: :desc)
+      render 'questions/show'
     end
   end
 
   def destroy
     answer = Answer.find params[:id]
-    answer.destroy
+    if can?(:destroy, answer)
+      answer.destroy
 
     redirect_to question_path(answer.question)
   end
@@ -37,5 +38,5 @@ class AnswersController < ApplicationController
   def answer_params
     params.require(:answer).permit(:body)
   end
-  
+
 end

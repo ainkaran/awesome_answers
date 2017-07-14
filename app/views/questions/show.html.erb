@@ -3,7 +3,10 @@
 
 <p><strong>Author: </strong> <%= @question.user&.full_name %></p>
 
-<% if user_signed_in? %>
+<!-- <% if user_signed_in? %> -->
+<%# can? is a helper method that came from the CanCanCan gem which will check the
+    rules in our /app/models/ability.rb file %>
+<% if user_signed_in? && can?(:manage, @question) %>
   <%= link_to 'Edit', edit_question_path(@question) %>
   <%# When you use `method: :delete`, Rails will use
   Javascript to mimick a delete request to the server %>
@@ -25,7 +28,7 @@ its `action` attribute. Inspect this form to know more! %>
 </div>
 <% end %> -->
 
-<% if user_signed_in? %>
+<% if user_signed_in? && @question.user == current_user%>
   <%= errors_for @answer %>
 
   <%= form_for [@question, @answer] do |f| %>
