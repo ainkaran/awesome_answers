@@ -3,6 +3,7 @@
 
 <p><strong>Author: </strong> <%= @question.user&.full_name %></p>
 
+<!-- <% if user_signed_in? %> -->
 <%# can? is a helper method that came from the CanCanCan gem which will check the
     rules in our /app/models/ability.rb file %>
 <% if user_signed_in? && can?(:manage, @question) %>
@@ -27,6 +28,7 @@ its `action` attribute. Inspect this form to know more! %>
 </div>
 <% end %> -->
 
+<!-- <% if user_signed_in? && @question.user == current_user%> -->
 <% if user_signed_in? %>
   <%= errors_for @answer %>
 
@@ -39,18 +41,22 @@ its `action` attribute. Inspect this form to know more! %>
 <% end %>
 
 <ul class='answer-list'>
-<% @answers.each do |answer| %>
-  <li>
-    <p><%= answer.body %></p>
-    <p><strong>Commentor: </strong> <%= answer.user&.full_name %></p>
-    <p>
-      <strong>Created at:</strong> <%= answer.created_at.to_formatted_s(:long) %>
-      <% if user_signed_in? && can?(:destroy, answer) %>
-        <%= link_to 'Delete', question_answer_path(@question, answer),
-          method: :delete, data: { confirm: 'Are you sure?'} %>
-      <% end %>
-    </p>
-    <%# https://apidock.com/rails/ActiveSupport/CoreExtensions/DateTime/Conversions/to_formatted_s %>
-  </li>
-<% end %>
+  <% @answers.each do |answer| %>
+
+    <li>
+      <%= answer.body %>
+      <p><strong>Commentor: </strong> <%= answer.user&.full_name %></p>
+      <p>
+        <strong>Created at:</strong> <%= answer.created_at.to_formatted_s(:long) %>
+        <% if user_signed_in? && can?(:destroy, answer) %>
+          <%= link_to 'Delete', question_answer_path(@question, answer),
+            method: :delete, data: { confirm: 'Are you sure?'} %>
+        <% end %>
+      </p>
+
+      <!-- <p><strong>Created at:</strong> <%= answer.created_at.to_formatted_s(:short) %></p> -->
+      <!-- <p><strong>Created at:</strong> <%= answer.created_at.to_formatted_s(:long) %></p> -->
+      <%# https://apidock.com/rails/ActiveSupport/CoreExtensions/DateTime/Conversions/to_formatted_s %>
+    </li>
+  <% end %>
 </ul>
