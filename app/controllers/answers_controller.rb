@@ -31,10 +31,14 @@ class AnswersController < ApplicationController
     if can?(:destroy, answer)
       answer.destroy
 
-    redirect_to question_path(answer.question)
+      redirect_to question_path(answer.question)
+    else
+      head :unauthorized
+    end
   end
 
   private
+
   def answer_params
     params.require(:answer).permit(:body)
   end
