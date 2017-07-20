@@ -1,4 +1,4 @@
-class QuestionsController < ApplicationController
+  class QuestionsController < ApplicationController
   # `before_action` can be used to run before any action in a controller.
   # The second argument is a symbol named after the method we would to run.
   # In this example, the before_action calls the find_question before say

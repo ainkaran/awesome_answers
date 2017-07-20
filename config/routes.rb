@@ -67,7 +67,7 @@ Rails.application.routes.draw do
   # `index` action within that controller. An action is a public instance method
   # that is defined within the controller.
   # as: :home will generate a URL helper that will gives a view helper method
-  # to auto-generate the URL
+  # to auto-ge  nerate the URL
 
 
   # get('/', { to: 'welcome#index', as: :home })

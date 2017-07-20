@@ -17,7 +17,7 @@ class WelcomeController < ApplicationController
 
     # by default the view file will use the default layout which is located in:
     # /app/views/layouts/application.html.erb
-    # the layout will contain the HTML `<head>` and usually contains the page's
+    # the layout will contain the HTML `<head               >` and usually contains the page's
     # header and footer. The content of you view file will go in the place of
     # `<%= yield %>` inside the layout file.
 end
