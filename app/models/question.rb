@@ -1,4 +1,8 @@
 class Question < ApplicationRecord
+  has_many :likes, dependent: :destroy
+
+  has_many :likers, through: :likes, source: :user
+
   # Like `belongs_to`, `has_many` tells Rails that Question is associated to
   # the Answer model.
   has_many :answers, dependent: :destroy

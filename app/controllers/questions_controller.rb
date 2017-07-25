@@ -54,6 +54,7 @@
 
   def show
     @answer = Answer.new
+    @like = @question.likes.find_by(user: current_user)
     # Using association methods just builds queries, meaning that
     # we can continue chaining more and more query methods such order, limit, offset, where
     # , etc
@@ -118,16 +119,16 @@
   def authorize_user!
     # if @question.user != current_user
     # head :unauthorized unless can?(:manage, @question)
-  unless can?(:manage, @question)
-    # redirect_to root_path, alert: 'Access denied'
+    unless can?(:manage, @question)
+      # redirect_to root_path, alert: 'Access denied'
 
-    # head will send an empty HTTP response, it takes one argument as a symbol
-    # and the argument will tell Rails to send the desired HTTP response code
-    # 	:unauthorized -> 401
-    # you can see more code on this page:
-    # http://billpatrianakos.me/blog/2013/10/13/list-of-rails-status-code-symbols/
-    head :unauthorized
-  end
+      # head will send an empty HTTP response, it takes one argument as a symbol
+      # and the argument will tell Rails to send the desired HTTP response code
+      # 	:unauthorized -> 401
+      # you can see more code on this page:
+      # http://billpatrianakos.me/blog/2013/10/13/list-of-rails-status-code-symbols/
+      head :unauthorized
+    end
   end
 
 end

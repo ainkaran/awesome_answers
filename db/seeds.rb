@@ -6,11 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-PASSWORD = 'supersccret'
+PASSWORD = 'supersecret'
 
 Answer.destroy_all
 Question.destroy_all
-
 User.destroy_all
 
 User.create first_name: 'Ainkaran', last_name: 'Pathmanathan', email: 'pat.ainkaran@gmail.com', password: PASSWORD
@@ -29,11 +28,14 @@ end
 users = User.all
 
 100.times do
-  Question.create title: Faker::ChuckNorris.fact,
-                  body: Faker::Hacker.say_something_smart,
-                  view_count: rand(1000),
-                  user: users.sample
+  question = Question.create(
+    title: Faker::ChuckNorris.fact,
+    body: Faker::Hacker.say_something_smart,
+    view_count: rand(1000),
+    user: users.sample
+  )
 
+  question.likers = users.shuffle.slice(0..rand(users.count))
 end
 
 questions = Question.all
@@ -48,9 +50,9 @@ questions.each do |question|
   end
 end
 
-
 answers = Answer.all
 
 puts Cowsay.say("Created #{users.count} users", :tux)
-puts Cowsay.say('created 100 questions', :cow)
-puts Cowsay.say("created #{answers.count} answers", :ghostbusters)
+puts Cowsay.say('Created 100 questions', :cow)
+puts Cowsay.say("Created #{Like.count} likes", :cheese)
+puts Cowsay.say("Created #{answers.count} answers", :ghostbusters)

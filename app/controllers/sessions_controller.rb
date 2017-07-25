@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
       # redirect_to home_path, notice: 'Thank you for signing in! â¤ï¸'
-      redirect_to root_path, notice: 'Thank you for signing in! â¤ï¸'
+      redirect_to root_path, notice: 'Thank you for signing in! 😀'
     else
       flash.now[:alert] = 'Wrong email or password!'
       render :new

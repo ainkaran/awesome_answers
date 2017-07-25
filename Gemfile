@@ -24,6 +24,8 @@ gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'jquery-rails'
+gem 'font-awesome-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -51,6 +53,12 @@ gem 'faker', github: 'stympy/faker'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails'
+  gem 'rails-controller-testing'
+  gem 'factory_girl_rails'
+  gem 'faker', github: 'stympy/faker'
+  gem 'nyan-cat-formatter'
+
 end
 
 group :development do
