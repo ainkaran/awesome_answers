@@ -21,7 +21,6 @@ In this case, the url for the `create` action to `questions` which is the
 
 <%= errors_for @question %>
 
-
 <%= form_for @question do |f| %>
   <div>
     <%= f.label :title, 'Your question title'%>
@@ -37,5 +36,10 @@ In this case, the url for the `create` action to `questions` which is the
     <%= f.text_area :body %>
   </div>
 
-  <%= f.submit "Submit your question" %>
+  <div>
+    <%= f.label :tag_list, "Tags (seperated by commas)" %>
+    <%= f.text_field :tag_list %>
+  </div>
+
+  <%= f.submit class: 'btn btn-primary'%>
 <% end %>

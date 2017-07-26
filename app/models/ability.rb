@@ -17,6 +17,12 @@ class Ability
     # User so we don't have to check if `user` is nil all the time.
     user ||= User.new
 
+    # this says that if the `is_admin?` methods returns true then the user is
+    # is able to `manage` meaning do any action of any model in the application
+    if user.is_admin?
+      can :manage, :all
+    end
+
     # DSL -> Domain Specific Language: Ruby code written in a certain way to
     #                                  looks like its own language but keep in
     #                                  mind it's just Ruby code
@@ -39,7 +45,6 @@ class Ability
     cannot :like, Question do |question|
       question.user == user
     end
-
 
     # remember that this only defines the rules, you still have to enforce the
     # rules yourself by actually using those rules in the controllers and views

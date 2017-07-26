@@ -9,14 +9,14 @@ class SessionsController < ApplicationController
     # 3. If authentication not successful, we alert the user with wrong credentials
     user = User.find_by(email: params[:email])
 
-    # user && user.authenticate(partition { |e|  }ams[:password])
+    # user && user.authenticate(params[:password])
     # &. can be used in place of the dot operator when calling methods on
     # objects. It gives us a way to against NoMethod for nil:Class errors.
     # It will immeditely return `nil` instead of calling the method after
     # it unless the object before is not `nil`.
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
-      # redirect_to home_path, notice: 'Thank you for signing in! â¤ï¸'
+      # flash[:notice] = 'Thank you for signing in! â¤ï¸'
       redirect_to root_path, notice: 'Thank you for signing in! 😀'
     else
       flash.now[:alert] = 'Wrong email or password!'
@@ -25,11 +25,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    # session[:user_id] = nil
-    # redirect_to home_path, notice: 'Signed out!'
-
     session[:user_id] = nil
     redirect_to root_path, notice: 'Signed out!'
   end
-
 end

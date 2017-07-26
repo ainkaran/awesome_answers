@@ -10,7 +10,7 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
-*= require font-awesome
+ *= require font-awesome
  *= require_tree .
  *= require_self
  */
@@ -19,20 +19,44 @@
   @import "bootstrap";
   /*@import "font-awesome";*/
 
- .field_with_errors input, .field_with_errors textarea {
-   border: medium solid red;
- }
+  .voting-widget {
+  width: 75px;
+  flex-shrink: 0;
 
- .alert {
-   border-radius: 5px;
-   padding: 0.5em;
- }
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
 
- .alert.alert-success {
-   background-color: YellowGreen;
- }
+.voting-widget a.active > i {
+  color: LightBlue;
+}
 
- .alert.alert-danger {
-   background-color: Salmon;
-   color: White;
- }
+.answer-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.answer-list > li {
+  display: flex;
+  margin: 10px 0;
+}
+
+.field_with_errors input, .field_with_errors textarea {
+  border: medium solid red;
+}
+
+.alert {
+  border-radius: 5px;
+  padding: 0.5em;
+}
+
+.alert.alert-success {
+  background-color: YellowGreen;
+}
+
+.alert.alert-danger {
+  background-color: Salmon;
+  color: White;
+}

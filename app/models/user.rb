@@ -1,7 +1,8 @@
 class User < ApplicationRecord
+  has_many :votes, dependent: :destroy
+  has_many :voted_answers, through: :votes, source: :answer
 
   has_many :likes, dependent: :destroy
-
   # has_many's first argument does not have to be another table name. It
   # can be a name of your choosing, but when doing so you must specify details
   # of the association. In this many to many association, we specify the
@@ -27,7 +28,6 @@ class User < ApplicationRecord
   # 5. The user instance gets the `authenticate` method which will allow
   #    us to verify if a user entered the correct password. It returns `false` if
   #    the password in incorrect and the user if correct.
-
   has_secure_password
 
   has_many :questions, dependent: :nullify

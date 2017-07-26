@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
-# render jason: params
+  # render jason: params
   before_action :authenticate_user!
   before_action :find_question, only: [:create]
   before_action :find_like, only: [:destroy]
@@ -9,7 +9,7 @@ class LikesController < ApplicationController
     if cannot? :like, @question
       redirect_to @question, alert: 'Cannot like your own question, dummy!'
     elsif like.save
-      redirect_to @question, notice: 'Thanks for liking! 😁'
+      redirect_to @question, notice: 'Thanks for liking!'
     else
       redirect_to @question, alert: like.errors.full_messages.join(', ')
     end
@@ -17,7 +17,7 @@ class LikesController < ApplicationController
 
   def destroy
     if @like.destroy
-      redirect_to @like.question, notice: '😂'
+      redirect_to @like.question, notice: 'ð'
     else
       redirect_to @like.question, alert: @like.errors.full_messages.join(', ')
     end
@@ -31,5 +31,4 @@ class LikesController < ApplicationController
   def find_like
     @like = Like.find(params[:id])
   end
-
 end

@@ -1,11 +1,9 @@
-  class QuestionsController < ApplicationController
+class QuestionsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   # `before_action` can be used to run before any action in a controller.
   # The second argument is a symbol named after the method we would to run.
   # In this example, the before_action calls the find_question before say
   # the index, or new, etc.
-
-  before_action :authenticate_user!, except: [:index, :show]
-
   before_action :find_question, only: [:edit, :destroy, :show, :update]
   # We can filter which methods the `before_action` will be called
   # by proving an `only:` argument giving an array symbols named after the actions.
@@ -29,16 +27,9 @@
   end
 
   def edit
-    # @question = Question.find params[:id]
-    # if @question.user != current_user
-    #   redirect_to root_path, alert: 'Access denied'
-    # end
   end
 
   def update
-    # @question = Question.find params[:id]
-    # question_params = params.require(:question).permit(:title, :body)
-
     if @question.update question_params
       redirect_to question_path(@question)
     else
@@ -47,7 +38,6 @@
   end
 
   def destroy
-    # @question = Question.find params[:id]
     @question.destroy
     redirect_to questions_path
   end
@@ -73,16 +63,6 @@
     # the debugger REPL. Type `exit` to leave byebug.
     # byebug
 
-    # question_params = params.require(:question).permit(:title, :body)
-    # The params object is avaible in all controllers and it gives you
-    # access to all the data coming from a form or url params
-
-    # Require is used to get a nested hashed with the given symbol
-    # inside of the params object (in this case :question)
-
-    # Every input field of a form must be permitted individiually
-    # otherwise rails will throw an error. This is to prevent users
-    # from creating their fields
     @question = Question.new question_params
     @question.user = current_user
 
@@ -100,7 +80,7 @@
 
   private
   def question_params
-    params.require(:question).permit(:title, :body)
+    params.require(:question).permit(:title, :body, :tag_list)
     # The params object is avaible in all controllers and it gives you
     # access to all the data coming from a form or url params
 
@@ -116,8 +96,10 @@
     @question = Question.find params[:id]
   end
 
+  # remember that if a `before_action` does `render`, `redirect_to` or `head`
+  # it will stop the request from getting to the action (it will basically halt
+  # the request right there)
   def authorize_user!
-    # if @question.user != current_user
     # head :unauthorized unless can?(:manage, @question)
     unless can?(:manage, @question)
       # redirect_to root_path, alert: 'Access denied'
@@ -130,7 +112,6 @@
       head :unauthorized
     end
   end
-
 end
 
 
